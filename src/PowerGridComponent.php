@@ -354,7 +354,7 @@ class PowerGridComponent extends Component
             });
 
         if ($this->withSortStringNumber && DB::getDriverName() != 'pgsql') {
-            $results->orderByRaw("$sortField+0 $this->sortDirection");
+            $results->orderByRaw("CAST({$sortField} AS unsigned)  $this->sortDirection");
         }
 
         $results = $results->orderBy($sortField, $this->sortDirection);
